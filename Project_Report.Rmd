@@ -1,0 +1,40 @@
+---
+title: "IAL 622 Project Documentation"
+author: "Ian Skarring"
+date: "5/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### **Project Overview**
+
+For my course project in IAL 622, I used a programmable microcontroller to collect temperature, humidity, and heat index data from the physical environment. In addition to being a learning exercise for using IoT devices to do analysis on our physical world, I wanted to do a comparison between manually collected weather data and what we see on the news, internet, and weather applications, etc. Technically speaking there is a generalized physical space where weather data is collected; and considering the number of measures that drive a number of what it "feels like" in a given physical space, it will be interesting to see what kind of material differences arise from this comparison.
+
+In addition to this comparative analysis, I'll also share some thoughts on where this project fits in with the domain of human-computer interaction. As the DIY culture grows and technology becomes more accessible to the wider global population, there could be some interesting shifts in terms of the standards we hold larger organizations to. For example in the case of weather data, if lots of others use the process as in this project and discover the data is different from what they'd find from a reporting service or outlet, will that change the way the individual weights the information they get from this reporting service or outlet? I'll expand on this in the **Philosophy** section.
+
+#### **Technology Specifications**
+
+For my project I used the Uno R3 from Elegoo, a DHT11 temperature and humidity sensor, some female-to-male Dupont wires, and then powered the board by connecting to my computer. For the connection schematic between the DHTxx temperature and humidity sensor and the BOARD, I've described below the linkages between the two using female-to-male Dupont wires.
+
+* GND to GND which bounds the grounded point that reads voltages
+* VCC to 5V power supply of sensor to the voltage input on the uno
+* DATA to D2 which passes serial data temperature and humidity readings to the uno
+
+For the software piece I used R Markdown for my documentation, the Arduino IDE for prototyping and collecting data, CoolTerm for logging data from the serial monitor into txt files, and Power BI Desktop to develop a dashboard with visualizations. I also owe a big thank you to the authors of the DHT11 library from Adafruit, since I am still pretty new to C++!
+
+#### **Data Characteristics**
+
+The data logged with CoolTerm and scraped from the Weather Underground site all came out pretty cleanly. There were some minor adjustments to make in terms of formatting, but it was pretty straightforward. I saved them as txt files and loaded them into Power BI Desktop. As I was collecting data to get familiar with the process, I was surprised by the variability in the values. I realize the values sit in a smaller range, but I expected as the thermostat was left alone and I left the sensor in the same spot that there wouldn't really be a need for the data to change. The other interesting thing I noticed was the difference between the thermostat in my room compared to the heat index reading from the DHT11 sensor, in certain cases there was nearly 10 degrees of difference. This is significant because the heat index is the measure synonymous with the "feels like" temperature.
+
+#### **Philosophical Ideas**
+
+Despite the lack of significant differences in the temperature, humidity, and heat index measures from the two sources the project got me thinking of how we rely on outside sources as information providers. We have organizations who collect and report information from analysis of our physical and digital worlds, and we place trust in them to provide useful and valuable information. Whether it is a space administration with satellite data, geological surveys with data about Earth, or weather organizations with data like this they represent ways in which we interact with our physical world.
+
+The core idea is cognitive-offloading; as individuals we don't bear the cost, measured in technical overhead, of collecting and analyzing information from our physical environment ourselves. In lots of cases it is already done for us; and as by design it makes the human condition slightly less technical. I'm curious where we go next though, because the IoT culture is growing and as learning exercises these kinds of experiences can be very enriching. I also think if this kind of situation leads to a "their words against mine" situation, because there are so many things we just accept: the light-switch working, the fan turning on, the car doors unlocking with our keys, etc. I think weather data on the television networks fits into this category: "I saw the weather on the television so that's what it will be like tomorrow." But what if that isn't accurate enough. Why was my thermostat 10 degrees difference from my "Feels like" temperature that the sensor recorded?
+
+#### **Additional Next Steps**
+
+In version 2 I would collect more data and mix up the number of locations I collect from. I'd like to see if the "Feels like" measure is as different elsewhere too. I also would like to expand the board's data collection to include wind-speed and pressure because I'd be interested to know if those are as constant as temperature and humidity readings. 
